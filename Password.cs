@@ -3,7 +3,7 @@
     public struct Password
     {
         private int numberOfSymbols;
-        private string alphabet;
+        private string? alphabet;
         private char[] password;
 
         public int NumberOfSymbols
@@ -16,7 +16,7 @@
             }
         }
 
-        public string Alphabet
+        public string? Alphabet
         {
             get => alphabet;
             set
@@ -26,7 +26,7 @@
             }
         }
 
-        public Password(string alphabet, int numberOfSymbols = 1)
+        public Password(string alphabet = Constants.SmallLetters, int numberOfSymbols = 1)
         {
             Alphabet = alphabet;
             NumberOfSymbols = numberOfSymbols;
