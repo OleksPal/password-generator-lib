@@ -4,7 +4,7 @@
     {
         private int numberOfSymbols;
         private string? alphabet;
-        private char[] password;
+        public LinkedList<char> password;
 
         public int NumberOfSymbols
         {
@@ -30,11 +30,37 @@
         {
             Alphabet = alphabet;
             NumberOfSymbols = numberOfSymbols;
-            password = new char[numberOfSymbols];
+            password = new LinkedList<char>();
 
-            // Initialize password with default value
+            // initialize password with start values
             for (int i = 0; i < numberOfSymbols; i++)
-                password[i] = alphabet[0];
+                password.AddLast(alphabet[0]);
+        }
+
+        public static Password operator ++(Password password)
+        {
+            var currentNode = password.password.Last;
+            int index = password.Alphabet.IndexOf(currentNode.Value);
+            var referenceLastNode = password.password.Last.ValueRef;
+
+            if (index < password.Alphabet.Length)
+            {
+                currentNode.Value = 'b';
+                return password;
+            }
+            return password;
+        }
+
+        public override string ToString()
+        {
+            string result = String.Empty;
+            var currentNode = password.First;
+            while (currentNode != null)
+            {
+                result += currentNode.Value.ToString();
+                currentNode = currentNode.Next;
+            }
+            return result;
         }
     }
 }
