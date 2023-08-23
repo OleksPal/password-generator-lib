@@ -1,10 +1,10 @@
 ﻿namespace PasswordGeneratorLibrary
 {
-    public struct Password
+    public class Password
     {
         private int numberOfSymbols;
         private string? alphabet;
-        public LinkedList<char> password;
+        private readonly LinkedList<char> password;
 
         public int NumberOfSymbols
         {
@@ -37,18 +37,31 @@
                 password.AddLast(alphabet[0]);
         }
 
-        public static Password operator ++(Password password)
+        public static Password operator ++(Password previousPassword)
         {
-            var currentNode = password.password.Last;
-            int index = password.Alphabet.IndexOf(currentNode.Value);
-            var referenceLastNode = password.password.Last.ValueRef;
+            var currentNode = previousPassword.password.Last;
+            // Index of node’s value in alphabet
+            int alphabetIndex = previousPassword.Alphabet.IndexOf(currentNode.Value);
 
-            if (index < password.Alphabet.Length)
+            if (alphabetIndex < previousPassword.Alphabet.Length - 1)
+                currentNode.Value = previousPassword.Alphabet[++alphabetIndex];
+            else
             {
-                currentNode.Value = 'b';
-                return password;
+                while (currentNode != null)
+                {
+                    if (currentNode.Previous == null) // Can’t increase previous value
+                        return previousPassword;
+                    currentNode.Value = previousPassword.Alphabet[0];
+                    currentNode = currentNode.Previous;
+                    alphabetIndex = previousPassword.Alphabet.IndexOf(currentNode.Value);
+                    if (alphabetIndex < previousPassword.Alphabet.Length - 1)
+                    {
+                        currentNode.Value = previousPassword.Alphabet[++alphabetIndex];
+                        break;
+                    }
+                }
             }
-            return password;
+            return previousPassword;
         }
 
         public override string ToString()
