@@ -4,7 +4,7 @@
     {
         private int numberOfSymbols;
         private string? alphabet;
-        private readonly LinkedList<char> password;
+        private LinkedList<char> text;
 
         public int NumberOfSymbols
         {
@@ -26,20 +26,26 @@
             }
         }
 
+        public LinkedList<char> Text
+        {
+            get => text;
+            private set => text = value;
+        }
+
         public Password(string alphabet = Constants.SmallLetters, int numberOfSymbols = 1)
         {
             Alphabet = alphabet;
             NumberOfSymbols = numberOfSymbols;
-            password = new LinkedList<char>();
+            Text = new LinkedList<char>();
 
             // initialize password with start values
             for (int i = 0; i < numberOfSymbols; i++)
-                password.AddLast(alphabet[0]);
+                Text.AddLast(alphabet[0]);
         }
 
         public static Password operator ++(Password previousPassword)
         {
-            var currentNode = previousPassword.password.Last;
+            var currentNode = previousPassword.Text.Last;
             // Index of node’s value in alphabet
             int alphabetIndex = previousPassword.Alphabet.IndexOf(currentNode.Value);
 
@@ -67,7 +73,7 @@
         public override string ToString()
         {
             string result = String.Empty;
-            var currentNode = password.First;
+            var currentNode = Text.First;
             while (currentNode != null)
             {
                 result += currentNode.Value.ToString();
