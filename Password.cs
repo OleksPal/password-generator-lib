@@ -81,5 +81,17 @@
             }
             return result;
         }
+
+        public bool IsMax()
+        {
+            var currentNode = Text.Last;
+            while (currentNode != null)
+            {
+                if (currentNode.Value != Alphabet[^1])
+                    return false;
+                currentNode = currentNode.Previous;
+            }
+            return true;
+        }
     }
 }
