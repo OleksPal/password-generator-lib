@@ -22,7 +22,7 @@
             set
             {
                 if (value != String.Empty && value != null)
-                    alphabet = value;
+                    alphabet = RemoveDuplicates(value);
             }
         }
 
@@ -92,6 +92,19 @@
                 currentNode = currentNode.Previous;
             }
             return true;
+        }
+
+        private string RemoveDuplicates(string inputAlphabet)
+        {
+            HashSet<char> hashSet = new HashSet<char>();
+            for (int i = 0; i < inputAlphabet.Length; i++)
+                hashSet.Add(inputAlphabet[i]);
+
+            string result = String.Empty;
+            foreach (var element in hashSet)
+                result += element;
+
+            return result;
         }
     }
 }
