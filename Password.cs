@@ -125,5 +125,16 @@
 
             return result;
         }
+
+        public void Reset()
+        {
+            var currentNode = Text.First;
+
+            while (currentNode != null)
+            {
+                currentNode.Value = Alphabet[0];
+                currentNode = currentNode.Next;
+            }
+        }
     }
 }
