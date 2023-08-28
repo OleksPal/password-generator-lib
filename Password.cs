@@ -11,8 +11,32 @@
             get => numberOfSymbols;
             set
             {
-                if (value >= 1)
+                if (value > numberOfSymbols && value >= 1)
+                {
                     numberOfSymbols = value;
+                    if (Text == null)
+                        Text = new LinkedList<char>();
+
+                    // Initialize password with start values
+                    while (Text.Count < value)
+                        Text.AddFirst(alphabet[0]);
+                }
+                else if (value < numberOfSymbols && value >= 1)
+                {
+                    numberOfSymbols = value;
+
+                    while (value < Text.Count)
+                        Text.RemoveFirst();
+                }
+                else 
+                {                    
+                    if (Text == null) 
+                    {
+                        numberOfSymbols = 1;
+                        Text = new LinkedList<char>();
+                        Text.AddLast(alphabet[0]);
+                    }                        
+                }
             }
         }
 
@@ -35,12 +59,7 @@
         public Password(string alphabet = Constants.SmallLetters, int numberOfSymbols = 1)
         {
             Alphabet = alphabet;
-            NumberOfSymbols = numberOfSymbols;
-            Text = new LinkedList<char>();
-
-            // initialize password with start values
-            for (int i = 0; i < numberOfSymbols; i++)
-                Text.AddLast(alphabet[0]);
+            NumberOfSymbols = numberOfSymbols;           
         }
 
         public static Password operator ++(Password previousPassword)
