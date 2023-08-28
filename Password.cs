@@ -40,13 +40,14 @@
             }
         }
 
-        public string? Alphabet
+        public string Alphabet
         {
-            get => alphabet;
+            get => alphabet!;
             set
             {
                 if (value != String.Empty && value != null)
                     alphabet = RemoveDuplicates(value);
+                else if (alphabet == null) alphabet = Constants.SmallLetters;
             }
         }
 
