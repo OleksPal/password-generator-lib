@@ -2,6 +2,7 @@
 {
     public class Password
     {
+
         private int numberOfSymbols;
         private string? alphabet;
         private LinkedList<char> text;
@@ -45,7 +46,7 @@
             get => alphabet!;
             set
             {
-                if (value != String.Empty && value != null)
+                if (!String.IsNullOrEmpty(value))
                     alphabet = RemoveDuplicates(value);
                 else if (alphabet == null) alphabet = Constants.SmallLetters;
             }
@@ -57,10 +58,13 @@
             private set => text = value;
         }
 
-        public Password(string alphabet = Constants.SmallLetters, int numberOfSymbols = 1)
+        public Password(string alphabet = Constants.SmallLetters, int numberOfSymbols = 1, 
+            string? startPosition = null)
         {
             Alphabet = alphabet;
-            NumberOfSymbols = numberOfSymbols;           
+            NumberOfSymbols = numberOfSymbols;
+            if (!String.IsNullOrEmpty(startPosition))
+                SetStart(startPosition);
         }
 
         public static Password operator ++(Password previousPassword)
@@ -136,6 +140,36 @@
                 currentNode.Value = Alphabet[0];
                 currentNode = currentNode.Next;
             }
+        }
+
+        public void SetStart(string startPosition)
+        {
+            if (IsContains(startPosition))
+            {
+                var currentNode = Text.First;
+
+                int stringIndex = 0;
+                while (currentNode != null && stringIndex != startPosition.Length)
+                {
+                    currentNode.Value = startPosition[stringIndex];
+                    currentNode = currentNode.Next;
+                    stringIndex++;
+                }
+            }            
+        }
+
+        private bool IsContains(string value)
+        {
+            bool isContains = true;
+            foreach (char symbol in value)
+            {
+                if (!Alphabet.Contains(symbol))
+                {
+                    isContains = false;
+                    break;
+                }
+            }
+            return isContains;
         }
     }
 }
