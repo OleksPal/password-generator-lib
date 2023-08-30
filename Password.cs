@@ -2,10 +2,16 @@
 {
     public class Password
     {
-
         private int numberOfSymbols;
         private string? alphabet;
         private LinkedList<char> text;
+        private Order orderBy;
+
+        public enum Order
+        {
+            Ascending,
+            Descending
+        }
 
         public int NumberOfSymbols
         {
@@ -29,14 +35,14 @@
                     while (value < Text.Count)
                         Text.RemoveFirst();
                 }
-                else 
-                {                    
-                    if (Text == null) 
+                else
+                {
+                    if (Text == null)
                     {
                         numberOfSymbols = 1;
                         Text = new LinkedList<char>();
                         Text.AddLast(alphabet[0]);
-                    }                        
+                    }
                 }
             }
         }
@@ -58,13 +64,25 @@
             private set => text = value;
         }
 
+        public Order OrderBy
+        {
+            get => orderBy;
+            set
+            {
+                if (value != orderBy)
+                    Alphabet = Reverse(Alphabet);
+                orderBy = value;
+            }
+        }
+
         public Password(string alphabet = Constants.SmallLetters, int numberOfSymbols = 1, 
-            string? startPosition = null)
+            string? startPosition = null, Order order = Order.Ascending)
         {
             Alphabet = alphabet;
             NumberOfSymbols = numberOfSymbols;
             if (!String.IsNullOrEmpty(startPosition))
                 SetStart(startPosition);
+            OrderBy = order;
         }
 
         public static Password operator ++(Password previousPassword)
@@ -104,6 +122,13 @@
                 currentNode = currentNode.Next;
             }
             return result;
+        }
+
+        public static string Reverse(string s)
+        {
+            char[] charArray = s.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
         }
 
         public bool IsMax()
