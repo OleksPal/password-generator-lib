@@ -2,19 +2,19 @@
 {
     internal interface ILength
     {
-        public int NumberOfSymbols { get; set; }
+        public int Count { get; set; }
     }
 
-    class NumberOfSymbols : ILength
+    internal class NumberOfSymbols : ILength
     {
-        public int NumberOfSymbols
+        public int Count 
         {
-            get => numberOfSymbols;
+            get => Count;
             set
             {
-                if (value > numberOfSymbols && value >= 1)
+                if (value > Count && value >= 1)
                 {
-                    numberOfSymbols = value;
+                    Count = value;
                     if (Text == null)
                         Text = new LinkedList<char>();
 
@@ -22,9 +22,9 @@
                     while (Text.Count < value)
                         Text.AddFirst(alphabet[0]);
                 }
-                else if (value < numberOfSymbols && value >= 1)
+                else if (value < Count && value >= 1)
                 {
-                    numberOfSymbols = value;
+                    Count = value;
 
                     while (value < Text.Count)
                         Text.RemoveFirst();
@@ -33,7 +33,7 @@
                 {
                     if (Text == null)
                     {
-                        numberOfSymbols = 1;
+                        Count = 1;
                         Text = new LinkedList<char>();
                         Text.AddLast(alphabet[0]);
                     }

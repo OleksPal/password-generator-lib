@@ -3,17 +3,39 @@
     internal abstract class Password
     {
         protected ILength numberOfSymbols;
-        protected IAlphabet alphabet;
-        protected IText text;
-        protected IOrder orderBy;
+        protected IPasswordText text;
 
-        protected Password(IAlphabet alphabet, ILength numberOfSymbols,
-            IText text, IOrder orderBy)
+        protected Password(ILength numberOfSymbols, IPasswordText text, string? startPosition = null)
         {
-            this.alphabet = alphabet;
             this.numberOfSymbols = numberOfSymbols;            
             this.text = text;
-            this.orderBy = orderBy;
+        }
+
+        public static Password operator ++(Password previousPassword)
+        {
+            var currentNode = previousPassword.text.Last;
+            // Index of node’s value in alphabet
+            int alphabetIndex = previousPassword.Alphabet.IndexOf(currentNode.Value);
+
+            if (alphabetIndex < previousPassword.Alphabet.Length - 1)
+                currentNode.Value = previousPassword.Alphabet[++alphabetIndex];
+            else
+            {
+                while (currentNode != null)
+                {
+                    if (currentNode.Previous == null) // Can’t increase previous value
+                        return previousPassword;
+                    currentNode.Value = previousPassword.Alphabet[0];
+                    currentNode = currentNode.Previous;
+                    alphabetIndex = previousPassword.Alphabet.IndexOf(currentNode.Value);
+                    if (alphabetIndex < previousPassword.Alphabet.Length - 1)
+                    {
+                        currentNode.Value = previousPassword.Alphabet[++alphabetIndex];
+                        break;
+                    }
+                }
+            }
+            return previousPassword;
         }
     }
 }

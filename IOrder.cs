@@ -1,6 +1,6 @@
 ﻿namespace PasswordGeneratorLibrary
 {
-    internal interface IOrder
+    public interface IOrder
     {
         public Order OrderBy { get; set; }
 
@@ -8,20 +8,6 @@
         {
             Ascending,
             Descending
-        }
-    }
-
-    internal class PasswordOrder : IOrder
-    {
-        public Order OrderBy
-        {
-            get => orderBy;
-            set
-            {
-                if (value != orderBy)
-                    Alphabet = Alphabet.Reverse(Alphabet);
-                orderBy = value;
-            }
         }
     }
 }

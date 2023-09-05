@@ -1,61 +1,29 @@
 ﻿namespace PasswordGeneratorLibrary
 {
-    internal interface IText
+    public interface IText
     {
-        public LinkedList<char> Text { get; set; }
+        public LinkedList<char> Text
+        {
+            get => Text;
+            private set => Text = value;
+        }
 
         public void SetStart(string startPosition);
 
         public void Reset();
 
-        public void Ismax();
-    }
+        public bool IsMax();
 
-    internal class Text : IText
-    {
-        public LinkedList<char> Text
+        public string ToString()
         {
-            get => text;
-            private set => text = value;
-        }
-
-        public void SetStart(string startPosition)
-        {
-            if (IsContains(startPosition))
-            {
-                var currentNode = Text.First;
-
-                int stringIndex = 0;
-                while (currentNode != null && stringIndex != startPosition.Length)
-                {
-                    currentNode.Value = startPosition[stringIndex];
-                    currentNode = currentNode.Next;
-                    stringIndex++;
-                }
-            }
-        }
-
-        public void Reset()
-        {
+            string result = String.Empty;
             var currentNode = Text.First;
-
             while (currentNode != null)
             {
-                currentNode.Value = Alphabet[0];
+                result += currentNode.Value.ToString();
                 currentNode = currentNode.Next;
             }
-        }
-
-        public bool IsMax()
-        {
-            var currentNode = Text.Last;
-            while (currentNode != null)
-            {
-                if (currentNode.Value != Alphabet[^1])
-                    return false;
-                currentNode = currentNode.Previous;
-            }
-            return true;
+            return result;
         }
     }
 }

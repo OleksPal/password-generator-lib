@@ -1,8 +1,17 @@
 ﻿namespace PasswordGeneratorLibrary
 {
-    internal interface IAlphabet
+    public interface IAlphabet
     {
-        public abstract string Alphabet { get; set; }
+        public string Alphabet
+        {
+            get => Alphabet!;
+            set
+            {
+                if (!String.IsNullOrEmpty(value))
+                    Alphabet = RemoveDuplicates(value);
+                else if (Alphabet == null) Alphabet = Constants.SmallLetters;
+            }
+        }
 
         public static string Reverse(string s)
         {
@@ -11,7 +20,7 @@
             return new string(charArray);
         }
 
-        protected string RemoveDuplicates(string inputAlphabet)
+        public static string RemoveDuplicates(string inputAlphabet)
         {
             HashSet<char> hashSet = new HashSet<char>();
             for (int i = 0; i < inputAlphabet.Length; i++)
@@ -36,20 +45,6 @@
                 }
             }
             return isContains;
-        }
-    }
-
-    internal class PasswordAlphabet : IAlphabet
-    {
-        public override string Alphabet
-        {
-            get => alphabet!;
-            set
-            {
-                if (!String.IsNullOrEmpty(value))
-                    alphabet = RemoveDuplicates(value);
-                else if (alphabet == null) alphabet = Constants.SmallLetters;
-            }
         }
     }
 }
