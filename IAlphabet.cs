@@ -2,6 +2,17 @@
 {
     public interface IAlphabet
     {
+        public string Alphabet { get; set; }
+
+        public string Reverse(string s);
+
+        public string RemoveDuplicates(string inputAlphabet);
+
+        public bool IsContains(string value);
+    }
+
+    internal class PasswordAlphabet : IAlphabet
+    {
         public string Alphabet
         {
             get => Alphabet!;
@@ -13,14 +24,14 @@
             }
         }
 
-        public static string Reverse(string s)
+        public string Reverse(string s)
         {
             char[] charArray = s.ToCharArray();
             Array.Reverse(charArray);
             return new string(charArray);
         }
 
-        public static string RemoveDuplicates(string inputAlphabet)
+        public string RemoveDuplicates(string inputAlphabet)
         {
             HashSet<char> hashSet = new HashSet<char>();
             for (int i = 0; i < inputAlphabet.Length; i++)
@@ -33,7 +44,7 @@
             return result;
         }
 
-        protected bool IsContains(string value)
+        public bool IsContains(string value)
         {
             bool isContains = true;
             foreach (char symbol in value)
