@@ -4,7 +4,7 @@
     {
         public string Alphabet { get; set; }
 
-        public string Reverse(string s);
+        public string Reverse();
 
         public string RemoveDuplicates(string inputAlphabet);
 
@@ -24,9 +24,9 @@
             }
         }
 
-        public string Reverse(string s)
+        public string Reverse()
         {
-            char[] charArray = s.ToCharArray();
+            char[] charArray = Alphabet.ToCharArray();
             Array.Reverse(charArray);
             return new string(charArray);
         }

@@ -26,7 +26,7 @@
             if(this.OrderBy != orderBy)
             {
                 this.OrderBy = orderBy;
-                return alphabet.Reverse(alphabet.Alphabet);
+                return alphabet.Reverse();
             }
             return alphabet.Alphabet;                
         }
