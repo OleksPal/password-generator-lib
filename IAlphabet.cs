@@ -11,16 +11,17 @@
         public bool IsContains(string value);
     }
 
-    internal class PasswordAlphabet : IAlphabet
+    public class PasswordAlphabet : IAlphabet
     {
+        private string alphabet;
         public string Alphabet
         {
-            get => Alphabet!;
+            get => alphabet!;
             set
             {
                 if (!String.IsNullOrEmpty(value))
-                    Alphabet = RemoveDuplicates(value);
-                else if (Alphabet == null) Alphabet = Constants.SmallLetters;
+                    alphabet = RemoveDuplicates(value);
+                else if (alphabet == null) alphabet = Constants.SmallLetters;
             }
         }
 

@@ -1,19 +1,18 @@
 ﻿namespace PasswordGeneratorLibrary
 {
-    internal abstract class Password
+    public abstract class Password
     {
-        protected ILength numberOfSymbols;
+        protected IPasswordText text;
         protected IAlphabet alphabet;
-        protected IText text;
         protected IOrder orderBy;
          
-        protected Password(ILength numberOfSymbols, IAlphabet alphabet, IOrder orderBy,
+        protected Password(IPasswordText text, IAlphabet alphabet, IOrder orderBy,
             string? startPosition)
         {
+            this.text = text;
             this.alphabet = alphabet;
             this.orderBy = orderBy;
-            this.numberOfSymbols = numberOfSymbols;
-            text.UpdateTextSize(numberOfSymbols.Count, this.alphabet, this.numberOfSymbols);            
+            text.UpdateTextSize(text.Count, this.alphabet);            
 
             if (!String.IsNullOrEmpty(startPosition))
                 text!.SetStart(startPosition, alphabet);
@@ -44,8 +43,6 @@
                 }
             }
             return previousPassword;
-        }
-
-        
+        }        
     }
 }

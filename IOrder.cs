@@ -13,12 +13,13 @@
         }
     }
 
-    internal class PasswordOrder : IOrder
+    public class PasswordOrder : IOrder
     {
+        private IOrder.Order orderBy;
         public IOrder.Order OrderBy
         {
-            get => OrderBy;
-            set => OrderBy = value;
+            get => orderBy;
+            set => orderBy = value;
         }
 
         public string ChangeOrder(IOrder.Order orderBy, IAlphabet alphabet)
