@@ -2,15 +2,15 @@
 {
     public class PasswordGenerator : Password
     {             
-        public PasswordGenerator(IPasswordText numberOfSymbols, IAlphabet alphabet, IOrder orderBy,
+        public PasswordGenerator(IPasswordText numberOfSymbols, IAlphabet alphabet,
             string? startPosition = null) 
-            : base(numberOfSymbols, alphabet, orderBy, startPosition)
+            : base(numberOfSymbols, alphabet, startPosition)
         { }
 
         public static PasswordGenerator operator ++(PasswordGenerator previousPassword)
         {
             PasswordGenerator newPassword = new PasswordGenerator(previousPassword.text,
-                previousPassword.alphabet, previousPassword.orderBy);
+                previousPassword.alphabet);
 
             LinkedListNode<char>? currentNode = newPassword.text.Text.Last;
             // Index of node’s value in alphabet

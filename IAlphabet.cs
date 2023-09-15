@@ -4,7 +4,7 @@
     {
         public string Alphabet { get; set; }
 
-        public string Reverse();
+        public void ChangeOrder();
 
         public string RemoveDuplicates(string inputAlphabet);
 
@@ -25,11 +25,11 @@
             }
         }
 
-        public string Reverse()
+        public void ChangeOrder() 
         {
             char[] charArray = Alphabet.ToCharArray();
             Array.Reverse(charArray);
-            return new string(charArray);
+            Alphabet = new string(charArray);
         }
 
         public string RemoveDuplicates(string inputAlphabet)

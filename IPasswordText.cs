@@ -85,16 +85,13 @@
 
         public void UpdateTextSize(int size, IAlphabet alphabet)
         {
-            if (Text == null)
-                Text = new LinkedList<char>();
-
-            if (size > Count && size >= 1)
+            if (size >= Count && size >= 1)
             {
                 Count = size;
 
                 // Initialize password with start values
                 while (Text.Count < size)
-                    Text.AddFirst(alphabet.Alphabet[0]);
+                    Text.AddLast(alphabet.Alphabet[0]);
             }
             else if (size < Count && size >= 1)
             {
@@ -102,11 +99,6 @@
 
                 while (size < Text.Count)
                     Text.RemoveFirst();
-            }
-            else
-            {
-                Count = 1;
-                Text.AddLast(alphabet.Alphabet[0]);
             }
         }
     }

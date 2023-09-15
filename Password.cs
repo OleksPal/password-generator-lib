@@ -3,15 +3,13 @@
     public abstract class Password
     {
         public IPasswordText text;
-        protected IAlphabet alphabet;
-        protected IOrder orderBy;
+        public IAlphabet alphabet;
          
-        protected Password(IPasswordText text, IAlphabet alphabet, IOrder orderBy,
-            string? startPosition)
+        protected Password(IPasswordText text, IAlphabet alphabet, string? startPosition)
         {
             this.text = text;
             this.alphabet = alphabet;
-            this.orderBy = orderBy;
+
             text.UpdateTextSize(text.Count, this.alphabet);            
 
             if (!String.IsNullOrEmpty(startPosition))
