@@ -6,9 +6,7 @@
 
         public void ChangeOrder();
 
-        public string RemoveDuplicates(string inputAlphabet);
-
-        public bool IsContains(string value);
+        internal bool IsContains(string value);
     }
 
     public class PasswordAlphabet : IAlphabet
@@ -32,7 +30,7 @@
             Alphabet = new string(charArray);
         }
 
-        public string RemoveDuplicates(string inputAlphabet)
+        private string RemoveDuplicates(string inputAlphabet)
         {
             HashSet<char> hashSet = new HashSet<char>();
             for (int i = 0; i < inputAlphabet.Length; i++)

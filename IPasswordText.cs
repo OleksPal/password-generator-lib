@@ -83,7 +83,7 @@
             return result;
         }
 
-        public void UpdateTextSize(int size, IAlphabet alphabet)
+        public void ChangeSize(int size, IAlphabet alphabet)
         {
             if (size >= Count && size >= 1)
             {
@@ -98,7 +98,7 @@
                 Count = size;
 
                 while (size < Text.Count)
-                    Text.RemoveFirst();
+                    Text.RemoveLast();
             }
         }
     }

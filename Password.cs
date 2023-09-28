@@ -10,7 +10,7 @@
             this.text = text;
             this.alphabet = alphabet;
 
-            text.UpdateTextSize(text.Count, this.alphabet);            
+            text.ChangeSize(text.Count, this.alphabet);            
 
             if (!String.IsNullOrEmpty(startPosition))
                 text!.SetStart(startPosition, alphabet);

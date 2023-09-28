@@ -10,7 +10,7 @@
 
         public bool IsMax(IAlphabet alphabet);
 
-        public void UpdateTextSize(int size, IAlphabet alphabet);
+        public void ChangeSize(int size, IAlphabet alphabet);
 
         public string ToString();
     }
